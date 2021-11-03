@@ -2,10 +2,10 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
 import { ArticleFull } from "../../../helpers/interfaces";
 
-export default async (
+export default async function (
   req: NextApiRequest,
   res: NextApiResponse<ArticleFull>
-) => {
+) {
   const { id } = req.query;
 
   const r = await axios.get(
@@ -19,4 +19,4 @@ export default async (
     }
   );
   res.status(200).json(r.data);
-};
+}

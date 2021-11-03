@@ -68,7 +68,7 @@ interface Props {
 
 export default function ArticleCard({ article }: Props) {
   return (
-    <Link href={`/article/${article.id}`}>
+    <Link href={`/article/${article.id}`} passHref>
       <Root>
         <Image src={article.image} alt="" />
         <div className="card-body">

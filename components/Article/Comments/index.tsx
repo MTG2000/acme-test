@@ -44,10 +44,10 @@ export default function Comments({ articleId }: { articleId: number }) {
         `${server}/api/comments?articleId=${articleId}&pageNo=0`
       );
       const data = res.data;
-      setComments([...comments, ...data]);
+      setComments((c) => [...c, ...data]);
       setLoading(false);
     })();
-  }, []);
+  }, [articleId]);
 
   return (
     <Root>

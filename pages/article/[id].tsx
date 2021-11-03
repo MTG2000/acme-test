@@ -18,11 +18,11 @@ const ArticlePageBase = (article: ArticleFull) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
   try {
     const { id } = ctx.params as { id: string };
     const res = await axios.get(`${server}/api/article/${id}`);
-    return { props: res.data.data, revalidate: 600 };
+    return { props: res.data.data };
   } catch (error) {
     return {
       notFound: true,
@@ -30,13 +30,4 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   }
 };
 
-export const getStaticPaths: GetStaticPaths = async (ctx) => {
-  const res = await axios.get(`${server}/api/articles/0`);
-  const articles = res.data.articles as Article[];
-  const paths = articles.map((article) => ({
-    params: { id: article.id.toString() },
-  }));
-
-  return { paths, fallback: "blocking" };
-};
 export default ArticlePageBase;
